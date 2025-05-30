@@ -22,7 +22,7 @@ mkdir ~/n8n
 cd ~/n8n
 nano docker-compose.yml
 
-#　lsで.n8nがなければ（任意）
+# lsで.n8nがなければ（任意）
 ~$ mkdir -p ~/.n8n
 ~$ sudo chown -R 1000:1000 ~/.n8n
 ~$ sudo chmod -R 700 ~/.n8n
@@ -51,11 +51,13 @@ services:
       - ./n8n_data:/home/node/.n8n
 **************************************
 これを書き，:wqで終了
+
 ~$ sudo docker-compose up -d
 ~$ sudo docker psで動作確認
 http://localhost:5678をブラウザで実行
 
 #古いコンテナやイメージを一度削除してから再作成する
+sudo docker-compose down -v --remove-orphans
 sudo docker-compose down --rmi all -v --remove-orphans
 sudo docker-compose up -d
 $ sudo docker run -d --name n8n -p 5678:5678 \
@@ -68,6 +70,14 @@ sudo apt install nginx
 sudo systemctl start nginx
 sudo systemctl enable nginx
 $ sudo nano /etc/nginx/sites-available/n8n
+
+
+
+
+
+
+
+
 ****zoho開発者コンソールを作成(しなくてよい事判明)
 https://api-console.zoho.com/
 右上の「Add Client」をクリック。
