@@ -55,14 +55,14 @@ services:
 ~$ sudo docker psで動作確認
 http://localhost:5678をブラウザで実行
 
-***古いコンテナやイメージを一度削除してから再作成する
+#古いコンテナやイメージを一度削除してから再作成する
 sudo docker-compose down --rmi all -v --remove-orphans
 sudo docker-compose up -d
 $ sudo docker run -d --name n8n -p 5678:5678 \
   -v ~/.n8n:/home/node/.n8n \
   n8nio/n8n
 
-***nginxインストール
+#nginxインストール
 sudo apt update
 sudo apt install nginx
 sudo systemctl start nginx
