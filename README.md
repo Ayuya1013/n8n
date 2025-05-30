@@ -30,25 +30,34 @@ nano docker-compose.yml
 #docker起動
 ~/n8n$ vim docker-compose.yml
 ********************************************
-version: "3"
+version: '3'
 
 services:
   n8n:
     image: n8nio/n8n
+    restart: always
     ports:
       - "5678:5678"
     environment:
       - N8N_BASIC_AUTH_ACTIVE=true
-      - N8N_BASIC_AUTH_USER=yuya       # 好きなユーザー名に変えてOK
-      - N8N_BASIC_AUTH_PASSWORD=1013   # 好きなパスワードに変えてOK
+      - N8N_BASIC_AUTH_USER=youruser      # 任意の管理ユーザー名に変更してください
+      - N8N_BASIC_AUTH_PASSWORD=yourpass  # 任意の管理パスワードに変更してください
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
       - GENERIC_TIMEZONE=Asia/Tokyo
+      - N8N_LOG_LEVEL=info
+      # Zoho, Google, SlackのAPIキーはn8nのCredential管理で登録するのでここでは不要
     volumes:
-      - ~/.n8n:/home/node/.n8n
+      - ./n8n_data:/home/node/.n8n
 **************************************
 これを書き，:wqで終了
 ~$ sudo docker-compose up -d
-~$docker psで動作確認
+~$ sudo docker psで動作確認
 http://localhost:5678をブラウザで実行
+
+***古いコンテナやイメージを一度削除してから再作成する
+sudo docker-compose down --rmi all -v --remove-orphans
+sudo docker-compose up -d
 
 ****zoho開発者コンソールを作成(しなくてよい事判明)
 https://api-console.zoho.com/
